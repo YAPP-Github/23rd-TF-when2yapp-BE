@@ -18,6 +18,7 @@ repos:
     rev: 23.3.0
     hooks:
       - id: black
+        exclude: ^(when2yapp/settings.py)
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.0.291
     hooks:
