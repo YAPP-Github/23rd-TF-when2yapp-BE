@@ -7,10 +7,10 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="ScenteTalker API",
+        title="when2yapp API",
         default_version="v1",
-        description="ScenteTalker Open API 문서 페이지 입니다.",
-        contact=openapi.Contact(email="bjq913@gmail.com"),
+        description="when2yapp Open API 문서 페이지 입니다.",
+        contact=openapi.Contact(email="wnstlr24@gmail.com"),
     ),
     validators=["flex"],
     public=True,
