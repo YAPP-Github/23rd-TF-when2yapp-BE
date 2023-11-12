@@ -3,7 +3,7 @@ from .serializers import (
     SelectedScheduleSerializer,
     AvailAbilitySerializer,
 )
-from .models import Schedule
+from .models import Schedule, AvailAbility
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -72,7 +72,7 @@ class SelectedScheduleCreateAPIView(generics.CreateAPIView):
         """
         request_data = request.data
         request_data = {**request.data, "schedule": schedule_pk}
-        print(request_data)
+
         serializer = SelectedScheduleSerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
@@ -95,6 +95,8 @@ class AvailAbilityCreateAPIView(generics.CreateAPIView):
         request_data = [
             {**data, "selected_schedule": selected_schedule_pk} for data in request.data
         ]
+
+        AvailAbility.objects.filter(selected_schedule=selected_schedule_pk).delete()
 
         serializer = AvailAbilitySerializer(data=request_data, many=True)
         if serializer.is_valid():
