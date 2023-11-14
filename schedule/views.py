@@ -7,9 +7,12 @@ from .models import Schedule, AvailAbility
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 
 
 class ScheduleAPIView(APIView):
+    renderer_classes = (CamelCaseJSONRenderer,)
+
     def get_schedule(pk):
         return Schedule.objects.get(pk=pk)
 
@@ -38,6 +41,7 @@ class ScheduleAPIView(APIView):
 
 class ScheduleCreateAPIView(generics.CreateAPIView):
     serializer_class = ScheduleSerializer
+    renderer_classes = (CamelCaseJSONRenderer,)
 
     def post(self, request):
         """
@@ -61,6 +65,7 @@ class ScheduleCreateAPIView(generics.CreateAPIView):
 
 class SelectedScheduleCreateAPIView(generics.CreateAPIView):
     serializer_class = SelectedScheduleSerializer
+    renderer_classes = (CamelCaseJSONRenderer,)
 
     def post(self, request, schedule_pk):
         """
@@ -82,6 +87,13 @@ class SelectedScheduleCreateAPIView(generics.CreateAPIView):
 
 
 class AvailAbilityCreateAPIView(generics.CreateAPIView):
+    serializer_class = AvailAbilitySerializer
+    renderer_classes = (CamelCaseJSONRenderer,)
+
+    def get_serializer(self, *args, **kwargs):
+        # kwargs['many'] = True
+        return super().get_serializer(*args, **kwargs)
+
     def post(self, request, schedule_pk, selected_schedule_pk):
         """
         가능한 스케줄 생성 API
