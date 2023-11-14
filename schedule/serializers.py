@@ -3,17 +3,20 @@ from rest_framework import serializers
 
 
 class AvailAbilitySerializer(serializers.ModelSerializer):
+    selected_schedule_id = serializers.IntegerField(source="selected_schedule")
+
     class Meta:
         model = AvailAbility
-        fields = "__all__"
+        fields = ["id", "selected_schedule_id", "start_time", "end_time"]
 
 
 class SelectedScheduleSerializer(serializers.ModelSerializer):
     avail_abilities = AvailAbilitySerializer(many=True, read_only=True)
+    schedule_id = serializers.IntegerField(source="schedule")
 
     class Meta:
         model = SelectedSchedule
-        fields = ["id", "schedule", "username", "avail_abilities"]
+        fields = ["id", "schedule_id", "username", "avail_abilities"]
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
