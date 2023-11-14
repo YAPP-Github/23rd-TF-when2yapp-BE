@@ -9,6 +9,7 @@ distlib==0.3.7
 dj-rest-auth==5.0.1
 Django==4.2.7
 django-allauth==0.58.2
+django-cors-headers==4.3.0
 django-extensions==3.2.3
 djangorestframework==3.14.0
 djangorestframework-camel-case==1.4.2
