@@ -76,8 +76,8 @@ class SelectedScheduleCreateAPIView(generics.CreateAPIView):
             - username: 사용자 이름
         """
         request_data = request.data
-        request_data = {**request.data, "schedule": schedule_pk}
-
+        request_data = {**request.data, "schedule_id": schedule_pk}
+        print(f"js/ {request_data}")
         serializer = SelectedScheduleSerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
@@ -105,7 +105,8 @@ class AvailAbilityCreateAPIView(generics.CreateAPIView):
                 - end_time: 종료시간
         """
         request_data = [
-            {**data, "selected_schedule": selected_schedule_pk} for data in request.data
+            {**data, "selected_schedule_id": selected_schedule_pk}
+            for data in request.data
         ]
 
         AvailAbility.objects.filter(selected_schedule=selected_schedule_pk).delete()

@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 class AvailAbilitySerializer(serializers.ModelSerializer):
     selected_schedule_id = serializers.PrimaryKeyRelatedField(
-        source="selected_schedule", read_only=True
+        source="selected_schedule", queryset=SelectedSchedule.objects.all()
     )
 
     class Meta:
@@ -14,7 +14,9 @@ class AvailAbilitySerializer(serializers.ModelSerializer):
 
 class SelectedScheduleSerializer(serializers.ModelSerializer):
     avail_abilities = AvailAbilitySerializer(many=True, read_only=True)
-    schedule_id = serializers.PrimaryKeyRelatedField(source="schedule", read_only=True)
+    schedule_id = serializers.PrimaryKeyRelatedField(
+        source="schedule", queryset=Schedule.objects.all()
+    )
 
     class Meta:
         model = SelectedSchedule
