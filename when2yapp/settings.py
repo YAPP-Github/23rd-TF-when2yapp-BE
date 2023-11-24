@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     # utils
     "django_extensions",
+    "djangorestframework_camel_case",
     # my apps
     "schedule",
     "user",
@@ -152,6 +153,9 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_PARSER_CLASSES": [
+        "djangorestframework_camel_case.parser.CamelCaseJSONParser",
+    ],
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {

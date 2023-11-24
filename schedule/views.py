@@ -77,7 +77,7 @@ class SelectedScheduleCreateAPIView(generics.CreateAPIView):
         """
         request_data = request.data
         request_data = {**request.data, "schedule_id": schedule_pk}
-        print(f"js/ {request_data}")
+
         serializer = SelectedScheduleSerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
